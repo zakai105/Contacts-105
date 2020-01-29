@@ -27,6 +27,7 @@ class SearchViewController: UIViewController {
 //    }
     
     @IBAction func redLightAction(_ sender: Any) {
+        
         trafficLightPresenter.trafficLightColorSelected(colorName:"Red")
     }
     
