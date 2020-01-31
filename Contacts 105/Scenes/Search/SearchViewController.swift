@@ -22,19 +22,8 @@ class SearchViewController: UIViewController, CNContactPickerDelegate, CNContact
         viewDelegate: self,
         trafficLightService: TrafficLightService()
     )
+
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        onClickPickContact()
-    }
-    
-    //MARK:- contact picker
     func onClickPickContact() {
         
         let pickerViewController = CNContactPickerViewController()
@@ -99,10 +88,24 @@ class SearchViewController: UIViewController, CNContactPickerDelegate, CNContact
     
     @IBAction func yellowLightAction(_ sender: Any) {
         trafficLightPresenter.trafficLightColorSelected(colorName:"Yellow")
+        
+        let vc = ViewController2()
+        navigationController?.pushViewController(vc, animated: true)
+//        present(vc, animated: true, completion: nil)
     }
     
     @IBAction func greenLightAction(_ sender: Any) {
         trafficLightPresenter.trafficLightColorSelected(colorName:"Green")
+        
+//        let storyboard = UIStoryboard(name: "SearchViewController2", bundle: nil)
+//        let controller = storyboard.instantiateInitialViewController()!
+//        navigationController?.pushViewController(controller, animated: true)
+        
+//        let svc = SearchViewController2(searchResultsController: nil)
+//        present(svc, animated: true, completion: nil)
+        
+        let cvc = ContactsViewController()
+        navigationController?.pushViewController(cvc, animated: true)
     }
 }
 
