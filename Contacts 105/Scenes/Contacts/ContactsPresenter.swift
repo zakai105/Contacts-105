@@ -8,27 +8,15 @@
 
 import Foundation
 
-struct ContactsPresenter {
+struct ContactsPresenter: ContactsPresentable {
     
-    private let viewDelegate: ContactsViewDelegate?
-    private let contactsService: ContactsService
+    private weak var viewController: ContactsDisplayable?
+    private let model: ContactsModelable
+    var dataSource: [ContactsDataStructure]?
 
-    init(viewDelegate: ContactsViewDelegate, contactsService: ContactsService) {
-        self.viewDelegate = viewDelegate
-        self.contactsService = contactsService
-    }
-
-    func didLoad() {
-
-        contactsService.RetrieveContacts(callBack: {
-            
-            guard let cNContacts = $0 else {
-                // TODO: Alert "you have no contacts"
-                return
-            }
-            
-            let contacts = cNContacts.map({ Contact(cNContact: $0) })
-            self.viewDelegate?.display(contacts: contacts)
-        })
+    init(viewController: ContactsDisplayable) {
+        self.viewController = viewController
+        model = ContactsModel()
+        dataSource = model.readContacts()
     }
 }

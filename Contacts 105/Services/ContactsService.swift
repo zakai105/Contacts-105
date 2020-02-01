@@ -11,27 +11,26 @@ import Contacts
 
 struct ContactsService {
     
-    func RetrieveContacts(callBack:([CNContact]?) -> Void) {
-        guard let keyDescriptors = cNKeyDescriptors else { return }
-        
-        let contactStore = CNContactStore()
-        let containers = cNContainers(from: contactStore)
-        
+    private let store = CNContactStore()
+    
+    func readContacts() -> [CNContact]? {
+        guard let keyDescriptors = cNKeyDescriptors else { return nil }
+                
         var results = [CNContact]()
         
-        containers?.forEach {
+        cNContainers?.forEach {
             
             let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
             
             do {
-                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keyDescriptors)
+                let containerResults = try store.unifiedContacts(matching: fetchPredicate, keysToFetch: keyDescriptors)
                 results.append(contentsOf: containerResults)
             } catch {
                 print(error.usefulDescription)
             }
         }
 
-        callBack(results)
+        return results
     }
 }
 
@@ -39,10 +38,10 @@ struct ContactsService {
 
 private extension ContactsService {
     
-    func cNContainers(from contactStore: CNContactStore) -> [CNContainer]? {
+    var cNContainers: [CNContainer]? {
         
         do {
-            return try contactStore.containers(matching: nil)
+            return try store.containers(matching: nil)
         } catch {
             print(error.usefulDescription)
             return nil

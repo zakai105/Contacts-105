@@ -1,5 +1,5 @@
 //
-//  ContactsModels.swift
+//  ContactsDataStructure.swift
 //  Contacts 105
 //
 //  Created by Roi Zakai on 1/31/20.
@@ -9,7 +9,7 @@
 import UIKit
 import Contacts
 
-struct Contact {
+struct ContactsDataStructure {
     
     let name: String?
 //    let avatarData: Data?

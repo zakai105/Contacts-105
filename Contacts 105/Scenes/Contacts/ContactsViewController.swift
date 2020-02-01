@@ -7,26 +7,19 @@
 //
 
 import UIKit
-import Contacts
-
-protocol ContactsViewDelegate {
-    func display(contacts: [Contact])
-}
 
 class ContactsViewController: UITableViewController {
     
-    private var contacts: [Contact]?
+//    private var contacts: [ContactsDataStructure]?
     
-    private lazy var presenter = ContactsPresenter(
-        viewDelegate: self,
-        contactsService: ContactsService()
-    )
-        
+    private var presenter: ContactsPresentable?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        presenter = ContactsPresenter(viewController: self)
         self.navigationItem.rightBarButtonItem = self.editButtonItem
-        presenter.didLoad()
+        tableView.reloadData()
     }
         
 //    func phoneNumberWithContryCode() -> [String] {
@@ -47,14 +40,13 @@ class ContactsViewController: UITableViewController {
 //    }
 }
 
-// MARK: - Contacts view delegate
+// MARK: - Contacts displayable
 
-extension ContactsViewController: ContactsViewDelegate {
+extension ContactsViewController: ContactsDisplayable {
     
-    func display(contacts: [Contact]) {
+    func display(contacts: [ContactsDataStructure]) {
         
-        self.contacts = contacts
-        tableView.reloadData()
+        // TODO: - do somthing...
     }
 }
 
@@ -63,14 +55,14 @@ extension ContactsViewController: ContactsViewDelegate {
 extension ContactsViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts?.count ?? 0
+        return presenter?.dataSource?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
-        cell.imageView?.image = contacts?[indexPath.row].avatar
-        cell.textLabel?.text = contacts?[indexPath.row].name
+        cell.imageView?.image = presenter?.dataSource?[indexPath.row].avatar
+        cell.textLabel?.text = presenter?.dataSource?[indexPath.row].name
         return cell
     }
 }
