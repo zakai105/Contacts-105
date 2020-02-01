@@ -25,7 +25,7 @@ class ContactsViewController: UITableViewController {
 
 extension ContactsViewController: ContactsDisplayable {
     
-    func display(contacts: [ContactsDataStructure]) {
+    func display(contacts: [ContactDataStructure]) {
         
         // TODO: - do somthing...
     }
@@ -34,17 +34,36 @@ extension ContactsViewController: ContactsDisplayable {
 // MARK: - Table view data source
 
 extension ContactsViewController {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.dataSource?.count ?? 0
+        
+        if section == 0 {
+            return 1
+        } else {
+            return presenter?.dataSource?.count ?? 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
         cell.selectionStyle = .none
-        cell.imageView?.image = presenter?.dataSource?[indexPath.row].avatar
-        cell.textLabel?.text = presenter?.dataSource?[indexPath.row].name
+        
+        if indexPath.section == 0 {
+            cell.textLabel?.textAlignment = .center
+            cell.textLabel?.textColor = .blue
+            cell.textLabel?.text = "Add new contact"
+            cell.imageView?.image = nil
+        } else {
+            cell.textLabel?.textAlignment = .natural
+            cell.textLabel?.text = presenter?.dataSource?[indexPath.row].name
+            cell.imageView?.image = presenter?.dataSource?[indexPath.row].avatar
+        }
+        
         return cell
     }
 }
@@ -54,8 +73,15 @@ extension ContactsViewController {
 extension ContactsViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let contact = presenter?.dataSource?[indexPath.row]
-        let cvc = ContactViewController()
+        
+        guard let cvc = UIStoryboard(name: "Contact", bundle: nil).instantiateInitialViewController() as? ContactViewController else { return }
+        
+        if indexPath.section == 0 {
+            cvc.isAdding = true
+        } else {
+            cvc.identifier = presenter?.dataSource?[indexPath.row].identifier
+        }
+        
         navigationController?.pushViewController(cvc, animated: true)
     }
 }

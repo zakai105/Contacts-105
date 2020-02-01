@@ -1,5 +1,5 @@
 //
-//  ContactsDataStructure.swift
+//  ContactDataStructure.swift
 //  Contacts 105
 //
 //  Created by Roi Zakai on 1/31/20.
@@ -9,19 +9,25 @@
 import UIKit
 import Contacts
 
-struct ContactsDataStructure {
+struct ContactDataStructure {
     
+    let identifier: String
     let name: String?
     let avatar: UIImage?
     let phoneNumbers: [String]?
     let emailAddresses: [String]?
-    let isSelected: Bool = false
-    let isInvited = false
+    let namePlaceHolder: String?
+    let phonePlaceHolder: String?
+    let mailPlaceHolder: String?
     
-    init(cNContact: CNContact) {
+    init(cNContact: CNContact, namePlaceHolder: String?, phonePlaceHolder: String?, mailPlaceHolder: String?) {
+        identifier = cNContact.identifier
         name = cNContact.givenName + " " + cNContact.familyName
         avatar = UIImage(data: cNContact.thumbnailImageData)
         phoneNumbers = cNContact.phoneNumbers.map({ $0.value.stringValue })
         emailAddresses = cNContact.emailAddresses.map({ $0.value as String })
+        self.namePlaceHolder = namePlaceHolder
+        self.phonePlaceHolder = phonePlaceHolder
+        self.mailPlaceHolder = mailPlaceHolder
     }
 }

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//import Contacts
 
 struct ContactsModel: ContactsModelable {
     
@@ -17,7 +16,9 @@ struct ContactsModel: ContactsModelable {
         contactsService = ContactsService()
     }
     
-    func readContacts() -> [ContactsDataStructure]? {
-        return contactsService.readContacts()?.map({ ContactsDataStructure(cNContact: $0) })
+    func readContacts() -> [ContactDataStructure]? {
+        return contactsService.readContacts()?
+            .map({ ContactDataStructure(
+                cNContact: $0, namePlaceHolder: "Name", phonePlaceHolder: "Phone number", mailPlaceHolder: "Email Addresse") })
     }
 }

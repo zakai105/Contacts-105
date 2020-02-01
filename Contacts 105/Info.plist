@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSCameraUsageDescription</key>
+	<string>access is neeeded for adding photos to contacts</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>access is neeeded for adding photos to contacts</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Access is needed to get contact information of your Contacts list.</string>
 	<key>CFBundleDevelopmentRegion</key>

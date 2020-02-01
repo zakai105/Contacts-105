@@ -13,24 +13,32 @@ struct ContactsService {
     
     private let store = CNContactStore()
     
-    func readContacts() -> [CNContact]? {
+    func readContacts(withIdentifiers identifiers: [String]? = nil) -> [CNContact]? {
         guard let keyDescriptors = cNKeyDescriptors else { return nil }
-                
-        var results = [CNContact]()
         
-        cNContainers?.forEach {
-            
-            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: $0.identifier)
-            
-            do {
-                let containerResults = try store.unifiedContacts(matching: fetchPredicate, keysToFetch: keyDescriptors)
-                results.append(contentsOf: containerResults)
-            } catch {
-                print(error.usefulDescription)
-            }
+        guard let identifiers = identifiers else {
+            return cNContainers?
+            .compactMap({ self.cNContacts(fromCNContainer: $0, keysToFetch: keyDescriptors) })
+            .flatMap({ $0 })
         }
-
-        return results
+        
+        return cNContainers?
+            .compactMap({ self.cNContacts(fromCNContainer: $0, keysToFetch: keyDescriptors, identifiers: identifiers) })
+            .flatMap({ $0 })
+    }
+    
+    func createContact(with cNMutableContact: CNMutableContact) -> Error? {
+        
+        let request = CNSaveRequest()
+        request.add(cNMutableContact, toContainerWithIdentifier: nil)
+        
+        do {
+            try store.execute(request)
+            return nil
+            
+        } catch {
+          return error
+        }
     }
 }
 
@@ -57,5 +65,29 @@ private extension ContactsService {
         ]
         
         return keysToFetch as? [CNKeyDescriptor]
+    }
+    
+    func cNContacts(fromCNContainer cNContainer: CNContainer, keysToFetch: [CNKeyDescriptor]) -> [CNContact]? {
+        
+        let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: cNContainer.identifier)
+        
+        do {
+            return try store.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
+        } catch {
+            print(error.usefulDescription)
+            return nil
+        }
+    }
+    
+    func cNContacts(fromCNContainer cNContainer: CNContainer, keysToFetch: [CNKeyDescriptor], identifiers: [String]) -> [CNContact]? {
+        
+        let fetchPredicate = CNContact.predicateForContacts(withIdentifiers: identifiers)
+        
+        do {
+            return try store.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
+        } catch {
+            print(error.usefulDescription)
+            return nil
+        }
     }
 }

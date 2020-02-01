@@ -9,13 +9,16 @@
 import Foundation
 
 protocol ContactDisplayable: class {
-    func display(contact: ContactsDataStructure)
+    func display(contact: ContactDataStructure)
+    func dismiss()
 }
 
 protocol ContactPresentable {
-    var dataSource: ContactsDataStructure? { get }
+    var dataSource: ContactDataStructure? { get }
+    func didAdd(contact: NewContactDataStructure)
 }
 
 protocol ContactModelable {
-    func readContact() -> ContactsDataStructure?
+    func readContact(withIdentifier identifier: String) -> ContactDataStructure?
+    func createContact(with contact: NewContactDataStructure) -> Error?
 }

@@ -12,7 +12,7 @@ struct ContactsPresenter: ContactsPresentable {
     
     private weak var viewController: ContactsDisplayable?
     private let model: ContactsModelable
-    var dataSource: [ContactsDataStructure]?
+    var dataSource: [ContactDataStructure]?
 
     init(viewController: ContactsDisplayable) {
         self.viewController = viewController

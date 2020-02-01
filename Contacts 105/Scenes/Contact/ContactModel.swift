@@ -9,14 +9,19 @@
 import Foundation
 
 struct ContactModel: ContactModelable {
-    
+
     private let contactsService: ContactsService
 
     init() {
         contactsService = ContactsService()
     }
     
-    func readContact() -> ContactsDataStructure? {
-        return contactsService.readContacts()?.map({ ContactsDataStructure(cNContact: $0) }).first
+    func readContact(withIdentifier identifier: String) -> ContactDataStructure? {
+        guard let contact = contactsService.readContacts(withIdentifiers: [identifier])?.first else { return nil }
+        return ContactDataStructure(cNContact: contact, namePlaceHolder: "Name", phonePlaceHolder: "Phone number", mailPlaceHolder: "Email Addresse")
+    }
+    
+    func createContact(with contact: NewContactDataStructure) -> Error? {
+        return contactsService.createContact(with: contact.cNMutableContact)
     }
 }

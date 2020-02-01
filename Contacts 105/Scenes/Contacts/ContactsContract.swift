@@ -9,13 +9,13 @@
 import Foundation
 
 protocol ContactsDisplayable: class {
-    func display(contacts: [ContactsDataStructure])
+    func display(contacts: [ContactDataStructure])
 }
 
 protocol ContactsPresentable {
-    var dataSource: [ContactsDataStructure]? { get }
+    var dataSource: [ContactDataStructure]? { get }
 }
 
 protocol ContactsModelable {
-    func readContacts() -> [ContactsDataStructure]?
+    func readContacts() -> [ContactDataStructure]?
 }
