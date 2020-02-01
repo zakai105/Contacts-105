@@ -59,11 +59,3 @@ private extension ContactsService {
         return keysToFetch as? [CNKeyDescriptor]
     }
 }
-
-extension Error {
-    
-    var usefulDescription: String {
-        let nSError = self as NSError
-        return "\(nSError), \(nSError.userInfo)"
-    }
-}

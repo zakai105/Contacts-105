@@ -9,35 +9,16 @@
 import UIKit
 
 class ContactsViewController: UITableViewController {
-    
-//    private var contacts: [ContactsDataStructure]?
-    
+        
     private var presenter: ContactsPresentable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         presenter = ContactsPresenter(viewController: self)
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = editButtonItem
         tableView.reloadData()
     }
-        
-//    func phoneNumberWithContryCode() -> [String] {
-//
-//        let contacts = Contacts.getContacts() // here calling the getContacts methods
-//        var arrPhoneNumbers = [String]()
-//        for contact in contacts {
-//            for ContctNumVar: CNLabeledValue in contact.phoneNumbers {
-//                if let fulMobNumVar  = ContctNumVar.value as? CNPhoneNumber {
-//                    //let countryCode = fulMobNumVar.value(forKey: "countryCode") get country code
-//                    if let MccNamVar = fulMobNumVar.value(forKey: "digits") as? String {
-//                        arrPhoneNumbers.append(MccNamVar)
-//                    }
-//                }
-//            }
-//        }
-//        return arrPhoneNumbers // here array has all contact numbers.
-//    }
 }
 
 // MARK: - Contacts displayable
@@ -61,8 +42,20 @@ extension ContactsViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = UITableViewCell()
+        cell.selectionStyle = .none
         cell.imageView?.image = presenter?.dataSource?[indexPath.row].avatar
         cell.textLabel?.text = presenter?.dataSource?[indexPath.row].name
         return cell
+    }
+}
+
+// MARK: - Table view delegate
+
+extension ContactsViewController {
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let contact = presenter?.dataSource?[indexPath.row]
+        let cvc = ContactViewController()
+        navigationController?.pushViewController(cvc, animated: true)
     }
 }
