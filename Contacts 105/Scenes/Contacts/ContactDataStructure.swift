@@ -9,13 +9,13 @@
 import UIKit
 import Contacts
 
-struct ContactDataStructure {
+class ContactDataStructure {
     
     let identifier: String
     let name: String?
     let avatar: UIImage?
-    let phoneNumbers: [String]?
-    let emailAddresses: [String]?
+    let phoneNumbers: [String?]?
+    let emailAddresses: [String?]?
     let namePlaceHolder: String?
     let phonePlaceHolder: String?
     let mailPlaceHolder: String?

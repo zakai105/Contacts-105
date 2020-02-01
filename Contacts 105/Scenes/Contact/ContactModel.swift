@@ -16,12 +16,20 @@ struct ContactModel: ContactModelable {
         contactsService = ContactsService()
     }
     
+    func createContact(with contact: RawContactDataStructure) -> Error? {
+        return contactsService.createContact(with: contact.cNMutableContact)
+    }
+    
     func readContact(withIdentifier identifier: String) -> ContactDataStructure? {
         guard let contact = contactsService.readContacts(withIdentifiers: [identifier])?.first else { return nil }
         return ContactDataStructure(cNContact: contact, namePlaceHolder: "Name", phonePlaceHolder: "Phone number", mailPlaceHolder: "Email Addresse")
     }
     
-    func createContact(with contact: NewContactDataStructure) -> Error? {
-        return contactsService.createContact(with: contact.cNMutableContact)
+    func updateContact(with contact: RawContactDataStructure) -> Error? {
+        return contactsService.updateContact(with: contact.cNMutableContact)
+    }
+    
+    func deleteContact(withIdentifier identifier: String) -> Error? {
+        return contactsService.deleteContact(withIdentifier: identifier)
     }
 }

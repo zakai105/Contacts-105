@@ -16,7 +16,8 @@
 		282A5FAC23E5A71100B7077F /* Contact.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 282A5FAB23E5A71100B7077F /* Contact.storyboard */; };
 		282A5FB023E5BFE600B7077F /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5FAE23E5BFE600B7077F /* TextFieldCell.swift */; };
 		282A5FB123E5BFE600B7077F /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 282A5FAF23E5BFE600B7077F /* TextFieldCell.xib */; };
-		282A5FB323E5D33D00B7077F /* NewContactDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5FB223E5D33D00B7077F /* NewContactDataStructure.swift */; };
+		282A5FB323E5D33D00B7077F /* RewContactDataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5FB223E5D33D00B7077F /* RewContactDataStructure.swift */; };
+		282A5FB523E621B800B7077F /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5FB423E621B800B7077F /* UIViewController.swift */; };
 		2832080D23DF459200BD0583 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2832080C23DF459200BD0583 /* AppDelegate.swift */; };
 		2832081223DF459200BD0583 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2832081023DF459200BD0583 /* Main.storyboard */; };
 		2832081523DF459200BD0583 /* Contacts_105.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2832081323DF459200BD0583 /* Contacts_105.xcdatamodeld */; };
@@ -40,7 +41,8 @@
 		282A5FAB23E5A71100B7077F /* Contact.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Contact.storyboard; sourceTree = "<group>"; };
 		282A5FAE23E5BFE600B7077F /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		282A5FAF23E5BFE600B7077F /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
-		282A5FB223E5D33D00B7077F /* NewContactDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContactDataStructure.swift; sourceTree = "<group>"; };
+		282A5FB223E5D33D00B7077F /* RewContactDataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewContactDataStructure.swift; sourceTree = "<group>"; };
+		282A5FB423E621B800B7077F /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		2832080923DF459200BD0583 /* Contacts 105.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Contacts 105.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2832080C23DF459200BD0583 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2832081123DF459200BD0583 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				282A5FA323E58E6A00B7077F /* ContactContract.swift */,
-				282A5FB223E5D33D00B7077F /* NewContactDataStructure.swift */,
+				282A5FB223E5D33D00B7077F /* RewContactDataStructure.swift */,
 				282A5FA523E58E7D00B7077F /* ContactModel.swift */,
 				282A5FA723E58E8D00B7077F /* ContactViewController.swift */,
 				282A5FA923E58EA000B7077F /* ContactPresenter.swift */,
@@ -149,8 +151,9 @@
 		287FD13F23E4D54B00F8AAA5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				282A5F9E23E58C7900B7077F /* UIImage.swift */,
 				282A5FA023E58D1C00B7077F /* Error.swift */,
+				282A5FB423E621B800B7077F /* UIViewController.swift */,
+				282A5F9E23E58C7900B7077F /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,8 +252,9 @@
 				282A5FA623E58E7D00B7077F /* ContactModel.swift in Sources */,
 				28D3400323E48CDE007A3051 /* ContactsPresenter.swift in Sources */,
 				287FD14323E4DA0400F8AAA5 /* ContactsModel.swift in Sources */,
+				282A5FB523E621B800B7077F /* UIViewController.swift in Sources */,
 				287BAA9123E493F600D5D3FE /* ContactDataStructure.swift in Sources */,
-				282A5FB323E5D33D00B7077F /* NewContactDataStructure.swift in Sources */,
+				282A5FB323E5D33D00B7077F /* RewContactDataStructure.swift in Sources */,
 				2832081523DF459200BD0583 /* Contacts_105.xcdatamodeld in Sources */,
 				282A5FA423E58E6B00B7077F /* ContactContract.swift in Sources */,
 				287BAA8F23E48EBB00D5D3FE /* ContactsService.swift in Sources */,

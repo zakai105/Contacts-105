@@ -1,5 +1,5 @@
 //
-//  NewContactDataStructure.swift
+//  RewContactDataStructure.swift
 //  Contacts 105
 //
 //  Created by Roi Zakai on 2/1/20.
@@ -9,8 +9,9 @@
 import UIKit
 import Contacts
 
-struct NewContactDataStructure {
+struct RawContactDataStructure {
     
+    var identifier: String?
     let name: String?
     let avatar: UIImage?
     let phoneNumbers: [String?]?
@@ -23,6 +24,8 @@ struct NewContactDataStructure {
         if let name = name {
             contact.givenName = name
         }
+
+        contact.imageData = avatar?.pngData()
         
         if let phoneNumbers = phoneNumbers?.compactMap({ $0 }) {
             contact.phoneNumbers = phoneNumbers.map({ CNLabeledValue(label: CNLabelWork, value: CNPhoneNumber(stringValue: $0)) })

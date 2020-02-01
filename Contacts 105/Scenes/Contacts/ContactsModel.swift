@@ -18,7 +18,6 @@ struct ContactsModel: ContactsModelable {
     
     func readContacts() -> [ContactDataStructure]? {
         return contactsService.readContacts()?
-            .map({ ContactDataStructure(
-                cNContact: $0, namePlaceHolder: "Name", phonePlaceHolder: "Phone number", mailPlaceHolder: "Email Addresse") })
+            .map({ ContactDataStructure(cNContact: $0, namePlaceHolder: "Name", phonePlaceHolder: "Phone number", mailPlaceHolder: "Email Addresse") })
     }
 }

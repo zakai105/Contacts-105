@@ -12,11 +12,10 @@ class ContactsViewController: UITableViewController {
         
     private var presenter: ContactsPresentable?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         presenter = ContactsPresenter(viewController: self)
-        navigationItem.rightBarButtonItem = editButtonItem
         tableView.reloadData()
     }
 }
@@ -25,9 +24,8 @@ class ContactsViewController: UITableViewController {
 
 extension ContactsViewController: ContactsDisplayable {
     
-    func display(contacts: [ContactDataStructure]) {
-        
-        // TODO: - do somthing...
+    func display(alert: UIAlertController) {
+        present(alert, animated: true)
     }
 }
 
@@ -40,12 +38,7 @@ extension ContactsViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if section == 0 {
-            return 1
-        } else {
-            return presenter?.dataSource?.count ?? 0
-        }
+        return section == 0 ? 1 : presenter?.dataSource?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -6,10 +6,10 @@
 //  Copyright © 2020 Roi Zakai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ContactsDisplayable: class {
-    func display(contacts: [ContactDataStructure])
+    func display(alert: UIAlertController)
 }
 
 protocol ContactsPresentable {

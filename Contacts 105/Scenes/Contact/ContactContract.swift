@@ -6,19 +6,25 @@
 //  Copyright © 2020 Roi Zakai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol ContactDisplayable: class {
-    func display(contact: ContactDataStructure)
+    func display(alert: UIAlertController)
+    func displayImagePicker(of sourceType: UIImagePickerController.SourceType)
     func dismiss()
 }
 
 protocol ContactPresentable {
     var dataSource: ContactDataStructure? { get }
-    func didAdd(contact: NewContactDataStructure)
+    func didAdd(contact: RawContactDataStructure)
+    func didUpdate(contact: RawContactDataStructure)
+    func didPressDelete()
+    func didPressAvatarButton()
 }
 
 protocol ContactModelable {
+    func createContact(with contact: RawContactDataStructure) -> Error?
     func readContact(withIdentifier identifier: String) -> ContactDataStructure?
-    func createContact(with contact: NewContactDataStructure) -> Error?
+    func updateContact(with contact: RawContactDataStructure) -> Error?
+    func deleteContact(withIdentifier identifier: String) -> Error?
 }

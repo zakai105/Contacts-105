@@ -6,7 +6,7 @@
 //  Copyright © 2020 Roi Zakai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct ContactsPresenter: ContactsPresentable {
     
@@ -17,6 +17,6 @@ struct ContactsPresenter: ContactsPresentable {
     init(viewController: ContactsDisplayable) {
         self.viewController = viewController
         model = ContactsModel()
-        dataSource = model.readContacts()
+        dataSource = model.readContacts()?.sorted(by: { $0.name?.lowercased() ?? "" < $1.name?.lowercased() ?? "" })
     }
 }
